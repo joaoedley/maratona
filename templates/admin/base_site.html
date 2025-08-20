@@ -1,0 +1,40 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Maratona 2025 Admin{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        🏃‍♂️ Maratona 2025 - Administração
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% load static %}{% static 'admin/css/custom_admin.css' %}">
+    <style>
+        /* Inline styles para garantir que funcionem */
+        #header {
+            background: linear-gradient(135deg, #FFB800 0%, #FFA500 100%) !important;
+        }
+        
+        #site-name a {
+            color: #1a1a1a !important;
+            text-decoration: none !important;
+            font-size: 1.5em !important;
+            font-weight: bold !important;
+        }
+        
+        .breadcrumbs {
+            background: #1a1a1a !important;
+            color: white !important;
+        }
+        
+        .breadcrumbs a {
+            color: #FFB800 !important;
+        }
+    </style>
+{% endblock %}
