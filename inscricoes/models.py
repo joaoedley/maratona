@@ -44,7 +44,7 @@ class Inscricao(models.Model):
         verbose_name='Status do Pagamento'
     )
     
-    # Campos para controle de pagamento
+    # campos para controle de pagamento
     mercado_pago_payment_id = models.CharField(max_length=100, blank=True, null=True)
     qr_code_data = models.TextField(blank=True, null=True)
     valor_inscricao = models.DecimalField(max_digits=10, decimal_places=2, default=1.00)
