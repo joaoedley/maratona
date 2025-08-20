@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maratona de Corrida 2025 - Inscrições</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="hero-section">
+        <div class="container">
+            <!-- Logo Section -->
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <div class="logo-container">
+                        <img src="/static/img/ACADEMIA CORPO E SAÚDE FITNES LOGO.jpg" alt="Academia Corpo & Saúde" class="logo-img">
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center" style="min-height: calc(100vh - 120px);">
+                <div class="col-lg-6">
+                    <h1 class="display-3 fw-bold text-white mb-4">
+                        1° Primeira Corrida de Rua Amadora
+                    </h1>
+                    <p class="lead text-white mb-4">
+                        Participe da maior maratona da região! 5KM de pura adrenalina e superação.
+                    </p>
+                    <div class="hero-info mb-4">
+                        <div class="info-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>19 de Outubro de 2025</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Largada às 6h da manhã</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-route"></i>
+                            <span>Percurso de 5KM</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-lg" onclick="scrollToInscricao(event)" style="z-index: 1000; position: relative;">
+                        <i class="fas fa-running"></i> Inscreva-se Agora
+                    </button>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image">
+                        <div class="maratona-poster">
+                            <div class="poster-content">
+                                <h3 class="poster-title">PREMIAÇÕES</h3>
+                                <h2 class="poster-main">1ª CORRIDA<br>DE RUA</h2>
+                                <p class="poster-date">19 DE OUTUBRO DE 2025</p>
+                                <p class="poster-price">INSCRIÇÃO: R$ 60,00</p>
+                                <p class="poster-info">PREMIAÇÕES POR<br>FAIXA ETÁRIA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sobre a Maratona -->
+    <section id="sobre" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-title mb-4">Sobre a Maratona</h2>
+                    <p class="lead mb-4">
+                        A Maratona de Corrida 2025 é um evento esportivo que reúne atletas de todas as idades e níveis de experiência. 
+                        Com um percurso desafiador de 5KM e uma organização impecável, nossa maratona proporciona uma experiência única para todos os participantes.
+                    </p>
+                    <p class="mb-4">
+                        O evento acontecerá no dia <strong>19 de Outubro de 2025</strong>, com largada às <strong>6h da manhã</strong>. 
+                        Não perca essa oportunidade de participar de uma das maiores maratonas da região!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categorias -->
+    <section id="categorias" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Categorias</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <h5>Masculino 15 a 29 anos</h5>
+                        <p>Categoria para homens jovens e adultos</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <h5>Masculino 30 a 39 anos</h5>
+                        <p>Categoria para homens adultos</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <h5>Masculino 40 a 49 anos</h5>
+                        <p>Categoria para homens experientes</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <h5>Masculino acima de 50 anos</h5>
+                        <p>Categoria para homens masters</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h5>Mulheres 15 a 30 anos</h5>
+                        <p>Categoria para mulheres jovens</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h5>Mulheres acima de 32 anos</h5>
+                        <p>Categoria para mulheres experientes</p>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="category-card special-category">
+                        <div class="category-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h5>Categoria Geral Visitantes</h5>
+                        <p>Categoria especial para visitantes e iniciantes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premiações -->
+    <section id="premiacoes" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Premiações</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="lead mb-4">
+                        Todos os participantes que completarem a prova receberão medalha de participação. 
+                        Além disso, os três primeiros colocados de cada categoria receberão prêmios em dinheiro:
+                    </p>
+                    <div class="row g-4 mt-4">
+                        <div class="col-md-4">
+                            <div class="prize-card gold">
+                                <div class="prize-icon">
+                                    🥇
+                                </div>
+                                <h4>1° lugar</h4>
+                                <p class="prize-amount">R$ 300,00</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="prize-card silver">
+                                <div class="prize-icon">
+                                    🥈
+                                </div>
+                                <h4>2° lugar</h4>
+                                <p class="prize-amount">R$ 200,00</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="prize-card bronze">
+                                <div class="prize-icon">
+                                    🥉
+                                </div>
+                                <h4>3° lugar</h4>
+                                <p class="prize-amount">R$ 100,00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário de Inscrição -->
+    <section id="inscricao" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Formulário de Inscrição</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="registration-form">
+                        <form id="inscricaoForm">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label for="nome" class="form-label">Nome Completo *</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="idade" class="form-label">Idade *</label>
+                                    <input type="number" class="form-control" id="idade" name="idade" min="15" max="100" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="sexo" class="form-label">Gênero *</label>
+                                    <select class="form-select" id="sexo" name="sexo" required>
+                                        <option value="">Selecione...</option>
+                                        <option value="M">Masculino</option>
+                                        <option value="F">Feminino</option>
+                                        <option value="O">Outro</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="cidade" class="form-label">Cidade *</label>
+                                    <input type="text" class="form-control" id="cidade" name="cidade" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="categoria" class="form-label">Categoria *</label>
+                                    <select class="form-select" id="categoria" name="categoria" required>
+                                        <option value="">Selecione sua categoria...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="termos" required>
+                                        <label class="form-check-label" for="termos">
+                                            Concordo com os termos e condições da maratona *
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                                        <i class="fas fa-credit-card"></i> Prosseguir para Pagamento
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Pagamento -->
+    <div class="modal fade" id="pagamentoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Pagamento PIX - Maratona 2025</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="pagamentoContent">
+                        <!-- Conteúdo será inserido dinamicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div class="modal fade" id="loadingModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                    <p class="mt-3 mb-0">Processando...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy;Academia Corpo e Saúde. Todos os direitos reservados. Criado Por Joõa Edley</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
