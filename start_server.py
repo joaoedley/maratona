@@ -80,14 +80,19 @@ print('Superusuário criado: admin/admin123')
 def start_server():
     """Iniciar servidor Django"""
     print("\n🚀 Iniciando servidor Django...")
-    print("📍 Servidor será executado em: http://127.0.0.1:8000")
-    print("📍 Admin: http://127.0.0.1:8000/admin")
-    print("📍 API: http://127.0.0.1:8000/api/inscricoes/categorias")
+    
+    # Detectar se está no Render ou desenvolvimento local
+    port = os.environ.get('PORT', '8000')
+    host = '0.0.0.0' if os.environ.get('RENDER') else '127.0.0.1'
+    
+    print(f"📍 Servidor será executado em: http://{host}:{port}")
+    print(f"📍 Admin: http://{host}:{port}/admin")
+    print(f"📍 API: http://{host}:{port}/api/inscricoes/categorias")
     print("\n⚠️  Pressione Ctrl+C para parar o servidor")
     print("=" * 50)
     
     try:
-        subprocess.run("python manage.py runserver", shell=True)
+        subprocess.run(f"python manage.py runserver {host}:{port}", shell=True)
     except KeyboardInterrupt:
         print("\n🛑 Servidor parado")
 

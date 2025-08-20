@@ -8,3 +8,6 @@ pip install -r requirements.txt
 rm -rf staticfiles
 python manage.py collectstatic --no-input --clear
 python manage.py migrate
+
+# Set RENDER environment variable
+export RENDER=true
