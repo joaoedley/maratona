@@ -2,7 +2,7 @@ services:
   - type: web
     name: maratona
     env: python
-    buildCommand: "./render_build.sh"
+    buildCommand: "./build.sh"
     startCommand: "python render_start.py"
     plan: free
     envVars:
@@ -18,9 +18,3 @@ services:
         sync: false
       - key: PORT
         value: "10000"
-
-databases:
-  - name: maratona-db
-    databaseName: maratona_p1gl
-    user: maratona_p1gl_user
-    plan: free
