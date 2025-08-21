@@ -7,4 +7,3 @@ mercadopago==2.2.3
 python-dotenv==1.0.1
 gunicorn==21.2.01
 Pillow==10.1.0
-psycopg2-binary==2.9.5
