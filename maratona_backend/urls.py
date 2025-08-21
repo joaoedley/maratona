@@ -115,9 +115,8 @@ urlpatterns = [
     path('', frontend_view, name='frontend'),
     path('styles.css', serve_css, name='css'),
     path('script.js', serve_js, name='js'),
-    # Custom static file serving with correct MIME types
-    re_path(r'^static/(?P<path>.*)$', serve_static_file, name='static_files'),
 ]
 
-# Serve media files
+# Serve static and media files
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
