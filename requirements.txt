@@ -7,4 +7,3 @@ mercadopago==2.2.3
 python-dotenv==1.0.1
 gunicorn==21.2.01
 Pillow==10.1.0
-whitenoise==6.5.0
