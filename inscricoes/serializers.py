@@ -6,7 +6,7 @@ class InscricaoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inscricao
         fields = [
-            'id', 'numero_inscricao', 'nome', 'idade', 'email', 'sexo',
+            'id', 'numero_inscricao', 'nome', 'idade', 'email', 'cpf', 'rg', 'sexo',
             'cidade', 'categoria', 'status_pagamento', 'valor_inscricao',
             'data_inscricao'
         ]
