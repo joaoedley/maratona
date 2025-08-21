@@ -111,7 +111,7 @@ def serve_js(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('inscricoes.urls')),
+    path('api/inscricoes/', include('inscricoes.urls')),
     path('', frontend_view, name='frontend'),
     path('styles.css', serve_css, name='css'),
     path('script.js', serve_js, name='js'),
