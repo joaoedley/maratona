@@ -1,4 +1,5 @@
 {% extends "admin/base.html" %}
+{% load static %}
 
 {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Maratona 2025 Admin{% endblock %}
 
@@ -14,11 +15,11 @@
 
 {% block extrahead %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% load static %}{% static 'admin/css/custom_admin.css' %}">
     <style>
-        /* Inline styles para garantir que funcionem */
+        /* CSS simplificado para funcionar no Render */
         #header {
-            background: linear-gradient(135deg, #FFB800 0%, #FFA500 100%) !important;
+            background: #FFB800 !important;
+            border-bottom: 3px solid #1a1a1a !important;
         }
         
         #site-name a {
@@ -31,10 +32,43 @@
         .breadcrumbs {
             background: #1a1a1a !important;
             color: white !important;
+            border-bottom: 2px solid #FFB800 !important;
         }
         
         .breadcrumbs a {
             color: #FFB800 !important;
+        }
+        
+        .button, input[type=submit], input[type=button], .submit-row input {
+            background: #FFB800 !important;
+            color: #1a1a1a !important;
+            border: none !important;
+            padding: 8px 15px !important;
+            border-radius: 4px !important;
+            font-weight: bold !important;
+        }
+        
+        .button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover {
+            background: #FFA500 !important;
+        }
+        
+        a:link, a:visited {
+            color: #FFB800 !important;
+        }
+        
+        .results th {
+            background: #1a1a1a !important;
+            color: white !important;
+        }
+        
+        .results tr:nth-child(even) {
+            background: #f8f9fa !important;
+        }
+        
+        .dashboard .module h2 {
+            background: #FFB800 !important;
+            color: #1a1a1a !important;
+            padding: 10px !important;
         }
     </style>
 {% endblock %}
