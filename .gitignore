@@ -24,7 +24,7 @@ ENV/
 Thumbs.db
 
 # Static files (will be collected in production)
-staticfiles/
+# staticfiles/
 
 # Media files
 media/

@@ -1,0 +1,239 @@
+/* Custom Admin CSS para Maratona 2025 */
+
+/* Cores principais */
+:root {
+    --primary-color: #FFB800;
+    --secondary-color: #1a1a1a;
+    --accent-color: #FFA500;
+    --text-light: #ffffff;
+    --bg-light: #f8f9fa;
+}
+
+/* Header customizado */
+#header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%) !important;
+    color: var(--secondary-color) !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#header h1, #header h1 a:link, #header h1 a:visited {
+    color: var(--secondary-color) !important;
+    font-weight: bold !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+#header h1:before {
+    content: "🏃‍♂️ ";
+    font-size: 1.2em;
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+    background: var(--secondary-color) !important;
+    color: var(--text-light) !important;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.breadcrumbs a {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+}
+
+.breadcrumbs a:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Sidebar navigation */
+#nav-sidebar {
+    background: var(--secondary-color) !important;
+    border-right: 3px solid var(--primary-color);
+}
+
+#nav-sidebar .module th {
+    background: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+    font-weight: bold;
+}
+
+#nav-sidebar .module a {
+    color: var(--text-light) !important;
+    padding: 8px 15px;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+#nav-sidebar .module a:hover {
+    background: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+    border-left: 3px solid var(--accent-color);
+}
+
+/* Botões */
+.button, input[type=submit], input[type=button], .submit-row input, button {
+    background: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    font-weight: bold !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+}
+
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, button:hover {
+    background: var(--accent-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
+}
+
+/* Links */
+a:link, a:visited {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--accent-color) !important;
+    text-decoration: underline;
+}
+
+/* Tabelas */
+.results table {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.results th {
+    background: var(--secondary-color) !important;
+    color: var(--text-light) !important;
+    font-weight: bold;
+    padding: 15px 10px;
+}
+
+.results tr:nth-child(even) {
+    background: var(--bg-light) !important;
+}
+
+.results tr:hover {
+    background: rgba(255, 184, 0, 0.1) !important;
+}
+
+/* Formulários */
+.form-row {
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+}
+
+.form-row label {
+    color: var(--secondary-color) !important;
+    font-weight: bold;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=number], select, textarea {
+    border: 2px solid #ddd !important;
+    border-radius: 5px !important;
+    padding: 8px 12px !important;
+    transition: border-color 0.3s ease !important;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=email]:focus, input[type=number]:focus, select:focus, textarea:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 5px rgba(255, 184, 0, 0.3) !important;
+}
+
+/* Dashboard */
+.dashboard .module {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.dashboard .module h2 {
+    background: var(--primary-color) !important;
+    color: var(--secondary-color) !important;
+    padding: 15px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.dashboard .module h2:before {
+    content: "📊 ";
+}
+
+/* Login page */
+.login {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+    min-height: 100vh;
+}
+
+.login #container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    padding: 40px;
+    margin-top: 50px;
+}
+
+.login #header h1 {
+    color: var(--secondary-color) !important;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login #header h1:before {
+    content: "🏃‍♂️ ";
+    font-size: 2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Mensagens */
+.messagelist {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.messagelist .success {
+    background: #28a745 !important;
+    color: white !important;
+}
+
+.messagelist .error {
+    background: #dc3545 !important;
+    color: white !important;
+}
+
+.messagelist .warning {
+    background: var(--accent-color) !important;
+    color: var(--secondary-color) !important;
+}
+
+/* Footer customizado */
+#footer {
+    background: var(--secondary-color) !important;
+    color: var(--text-light) !important;
+    text-align: center;
+    padding: 20px;
+    border-top: 3px solid var(--primary-color);
+}
+
+#footer:after {
+    content: " | Maratona 2025 🏃‍♂️";
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    #nav-sidebar {
+        display: none;
+    }
+    
+    .login #container {
+        margin: 20px;
+        padding: 20px;
+    }
+}
