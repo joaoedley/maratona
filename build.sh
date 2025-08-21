@@ -6,7 +6,13 @@ pip install -r requirements.txt
 
 # Clear static files and collect again
 rm -rf staticfiles
-python manage.py collectstatic --no-input --clear
+echo "🔄 Coletando arquivos estáticos..."
+python manage.py collectstatic --no-input --clear --verbosity=2
+
+# Verify static files were collected
+echo "📁 Verificando arquivos estáticos coletados:"
+ls -la staticfiles/admin/css/ || echo "❌ Pasta admin/css não encontrada"
+ls -la staticfiles/admin/js/ || echo "❌ Pasta admin/js não encontrada"
 
 # Run all migrations (including Django core)
 python manage.py makemigrations
