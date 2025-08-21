@@ -12,3 +12,9 @@ services:
         value: "3.11.4"
       - key: RENDER
         value: "true"
+
+databases:
+  - name: maratona-db
+    databaseName: maratona
+    user: maratona_user
+    plan: free
