@@ -36,12 +36,42 @@ def frontend_view(request):
 def serve_static_file(request, path):
     """Serve static files with correct MIME types"""
     try:
-        # Construct the full file path
-        file_path = os.path.join(settings.BASE_DIR, 'staticfiles', path)
+        # Try multiple possible paths
+        possible_paths = [
+            os.path.join(settings.BASE_DIR, 'staticfiles', path),
+            os.path.join(settings.BASE_DIR, 'static', path),
+            os.path.join(settings.STATIC_ROOT, path) if settings.STATIC_ROOT else None
+        ]
         
-        # Check if file exists
-        if not os.path.exists(file_path):
-            return HttpResponse('File not found', status=404)
+        file_path = None
+        for p in possible_paths:
+            if p and os.path.exists(p):
+                file_path = p
+                break
+        
+        if not file_path:
+            # Debug: list available files
+            debug_info = f"File not found: {path}\n"
+            debug_info += f"Tried paths:\n"
+            for p in possible_paths:
+                if p:
+                    debug_info += f"  - {p} (exists: {os.path.exists(p)})\n"
+            
+            # Check if staticfiles directory exists and list contents
+            staticfiles_dir = os.path.join(settings.BASE_DIR, 'staticfiles')
+            if os.path.exists(staticfiles_dir):
+                debug_info += f"Staticfiles directory contents:\n"
+                for root, dirs, files in os.walk(staticfiles_dir):
+                    level = root.replace(staticfiles_dir, '').count(os.sep)
+                    indent = ' ' * 2 * level
+                    debug_info += f"{indent}{os.path.basename(root)}/\n"
+                    subindent = ' ' * 2 * (level + 1)
+                    for file in files[:10]:  # Limit to first 10 files
+                        debug_info += f"{subindent}{file}\n"
+                    if len(files) > 10:
+                        debug_info += f"{subindent}... and {len(files) - 10} more files\n"
+            
+            return HttpResponse(debug_info, status=404, content_type='text/plain')
         
         # Determine MIME type
         mime_type, _ = mimetypes.guess_type(file_path)
