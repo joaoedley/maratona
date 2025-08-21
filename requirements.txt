@@ -1,4 +1,4 @@
-Django==4.2.7
+Django>=5.0,<6.0
 djangorestframework==3.15.2
 django-cors-headers==4.4.0
 requests==2.32.3
@@ -7,3 +7,5 @@ mercadopago==2.2.3
 python-dotenv==1.0.1
 gunicorn==21.2.01
 Pillow==10.1.0
+psycopg2-binary
+dj-database-url
