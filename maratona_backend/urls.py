@@ -15,12 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic import RedirectView
 from django.http import HttpResponse
 from django.shortcuts import render
+import os
+import mimetypes
 
 def frontend_view(request):
     """Serve the frontend HTML"""
@@ -30,6 +32,34 @@ def frontend_view(request):
         return HttpResponse(content, content_type='text/html')
     except FileNotFoundError:
         return HttpResponse('<h1>Frontend não encontrado</h1><p>Acesse <a href="/admin/">Admin</a> ou <a href="/api/inscricoes/categorias/">API</a></p>')
+
+def serve_static_file(request, path):
+    """Serve static files with correct MIME types"""
+    try:
+        # Construct the full file path
+        file_path = os.path.join(settings.BASE_DIR, 'staticfiles', path)
+        
+        # Check if file exists
+        if not os.path.exists(file_path):
+            return HttpResponse('File not found', status=404)
+        
+        # Determine MIME type
+        mime_type, _ = mimetypes.guess_type(file_path)
+        if mime_type is None:
+            if path.endswith('.css'):
+                mime_type = 'text/css'
+            elif path.endswith('.js'):
+                mime_type = 'application/javascript'
+            else:
+                mime_type = 'application/octet-stream'
+        
+        # Read and serve the file
+        with open(file_path, 'rb') as f:
+            content = f.read()
+        
+        return HttpResponse(content, content_type=mime_type)
+    except Exception as e:
+        return HttpResponse(f'Error serving file: {str(e)}', status=500)
 
 def serve_css(request):
     """Serve CSS file"""
@@ -50,13 +80,14 @@ def serve_js(request):
         return HttpResponse('// JS not found', content_type='application/javascript')
 
 urlpatterns = [
-    path('', frontend_view, name='frontend'),
-    path('styles.css', serve_css, name='styles'),
-    path('script.js', serve_js, name='script'),
     path('admin/', admin.site.urls),
-    path('api/inscricoes/', include('inscricoes.urls')),
+    path('api/', include('inscricoes.urls')),
+    path('', frontend_view, name='frontend'),
+    path('styles.css', serve_css, name='css'),
+    path('script.js', serve_js, name='js'),
+    # Custom static file serving with correct MIME types
+    re_path(r'^static/(?P<path>.*)$', serve_static_file, name='static_files'),
 ]
 
-# Always serve static files (needed for production)
+# Serve media files
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
