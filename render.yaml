@@ -1,20 +1,26 @@
 services:
   - type: web
-    name: maratona-backend
+    name: maratona
     env: python
-    buildCommand: "./build.sh"
+    buildCommand: "./render_build.sh"
     startCommand: "python render_start.py"
     plan: free
     envVars:
       - key: DEBUG
         value: "False"
-      - key: PYTHON_VERSION
-        value: "3.11.4"
-      - key: RENDER
-        value: "true"
+      - key: DISABLE_COLLECTSTATIC
+        value: "1"
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: MERCADO_PAGO_ACCESS_TOKEN
+        sync: false
+      - key: MERCADO_PAGO_PIX_KEY
+        sync: false
+      - key: PORT
+        value: "10000"
 
 databases:
   - name: maratona-db
-    databaseName: maratona
-    user: maratona_user
+    databaseName: maratona_p1gl
+    user: maratona_p1gl_user
     plan: free
