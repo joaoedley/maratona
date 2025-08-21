@@ -217,6 +217,8 @@ O design utiliza:
 - O sistema suporta **webhook automático** do Mercado Pago
 - Todas as validações são feitas tanto no frontend quanto no backend
 
+**Deploy timestamp: 2025-08-20 22:27**
+
 ## 📞 Suporte
 
 Para dúvidas ou problemas:
