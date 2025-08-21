@@ -8,17 +8,17 @@ from .models import Inscricao
 @admin.register(Inscricao)
 class InscricaoAdmin(admin.ModelAdmin):
     list_display = [
-        'numero_inscricao', 'nome', 'idade', 'email', 'sexo', 
+        'numero_inscricao', 'nome', 'idade', 'email', 'cpf', 'rg', 'sexo', 
         'cidade', 'categoria', 'status_pagamento_badge', 'data_inscricao'
     ]
     list_filter = ['status_pagamento', 'categoria', 'sexo', 'data_inscricao']
-    search_fields = ['numero_inscricao', 'nome', 'email', 'cidade']
+    search_fields = ['numero_inscricao', 'nome', 'email', 'cpf', 'rg', 'cidade']
     readonly_fields = ['numero_inscricao', 'data_inscricao', 'data_pagamento']
     list_per_page = 50
     
     fieldsets = (
         ('Informações Pessoais', {
-            'fields': ('numero_inscricao', 'nome', 'idade', 'email', 'sexo', 'cidade')
+            'fields': ('numero_inscricao', 'nome', 'idade', 'email', 'cpf', 'rg', 'sexo', 'cidade')
         }),
         ('Categoria e Pagamento', {
             'fields': ('categoria', 'valor_inscricao', 'status_pagamento')
@@ -51,7 +51,7 @@ class InscricaoAdmin(admin.ModelAdmin):
         
         writer = csv.writer(response)
         writer.writerow([
-            'Número', 'Nome', 'Idade', 'Email', 'Sexo', 'Cidade', 
+            'Número', 'Nome', 'Idade', 'Email', 'CPF', 'RG', 'Sexo', 'Cidade', 
             'Categoria', 'Status Pagamento', 'Data Inscrição'
         ])
         
@@ -61,6 +61,8 @@ class InscricaoAdmin(admin.ModelAdmin):
                 inscricao.nome,
                 inscricao.idade,
                 inscricao.email,
+                inscricao.cpf,
+                inscricao.rg,
                 inscricao.get_sexo_display(),
                 inscricao.cidade,
                 inscricao.get_categoria_display(),
