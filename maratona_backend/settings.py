@@ -81,15 +81,23 @@ WSGI_APPLICATION = 'maratona_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-import dj_database_url
-
 # Configuração do banco de dados
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 if DATABASE_URL:
-    # PostgreSQL em produção
+    # PostgreSQL em produção - parsing manual da URL
+    import urllib.parse as urlparse
+    url = urlparse.urlparse(DATABASE_URL)
+    
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': url.path[1:],
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port,
+        }
     }
 else:
     # SQLite em desenvolvimento
