@@ -15,146 +15,60 @@
 
 {% block extrahead %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/custom_admin.css' %}">
     <style>
-        /* Correções para partes brancas/bugadas */
-        body {
-            background: #f8f9fa !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-        
-        #container {
-            background: white !important;
-            min-height: 100vh !important;
-        }
-        
-        #content {
-            background: white !important;
-            padding: 20px !important;
-        }
-        
-        #content-main {
-            background: white !important;
-            padding: 0 !important;
-        }
-        
-        .results {
-            background: white !important;
-            border: 1px solid #ddd !important;
-            border-radius: 8px !important;
-            overflow: hidden !important;
-        }
-        
-        .results table {
-            width: 100% !important;
-            background: white !important;
-            margin: 0 !important;
-        }
-        
-        .results tbody tr {
-            background: white !important;
-        }
-        
-        .results tbody tr:nth-child(even) {
-            background: #f8f9fa !important;
-        }
-        
-        .results tbody tr:hover {
-            background: rgba(255, 184, 0, 0.1) !important;
-        }
-        
-        .results td, .results th {
-            padding: 12px 8px !important;
-            border-bottom: 1px solid #eee !important;
-            background: inherit !important;
-        }
-        
-        .paginator {
-            background: white !important;
-            padding: 15px !important;
-            border-top: 1px solid #ddd !important;
-        }
-        
-        .actions {
-            background: #f8f9fa !important;
-            padding: 10px !important;
-            border-bottom: 1px solid #ddd !important;
-        }
-        
-        .changelist-search {
-            background: #f8f9fa !important;
-            padding: 15px !important;
-            border-bottom: 1px solid #ddd !important;
-        }
-        
-        #changelist-filter {
-            background: white !important;
-            border-left: 1px solid #ddd !important;
-            padding: 15px !important;
-        }
-        
-        #changelist-filter h2 {
+        /* CSS básico para admin - sem quebrar layout */
+        #header {
             background: #FFB800 !important;
+            border-bottom: 3px solid #1a1a1a !important;
+        }
+        
+        #site-name a {
             color: #1a1a1a !important;
-            padding: 8px 12px !important;
-            margin: 0 0 10px 0 !important;
-            border-radius: 4px !important;
-        }
-        
-        #changelist-filter h3 {
-            color: #1a1a1a !important;
-            margin: 15px 0 5px 0 !important;
-            font-weight: bold !important;
-        }
-        
-        #changelist-filter ul {
-            background: white !important;
-            padding: 0 !important;
-            margin: 0 0 15px 0 !important;
-        }
-        
-        #changelist-filter li {
-            background: white !important;
-            padding: 5px 0 !important;
-            border-bottom: 1px solid #eee !important;
-        }
-        
-        #changelist-filter a {
-            color: #FFB800 !important;
             text-decoration: none !important;
-            padding: 5px 10px !important;
-            display: block !important;
-        }
-        
-        #changelist-filter a:hover {
-            background: rgba(255, 184, 0, 0.1) !important;
-            color: #FFA500 !important;
-        }
-        
-        #changelist-filter .selected {
-            background: #FFB800 !important;
-            color: #1a1a1a !important;
+            font-size: 1.5em !important;
             font-weight: bold !important;
         }
         
-        .object-tools {
-            background: transparent !important;
-            padding: 10px 0 !important;
+        .breadcrumbs {
+            background: #1a1a1a !important;
+            color: white !important;
+            border-bottom: 2px solid #FFB800 !important;
         }
         
-        .object-tools a {
+        .breadcrumbs a {
+            color: #FFB800 !important;
+        }
+        
+        .button, input[type=submit], input[type=button], .submit-row input {
             background: #FFB800 !important;
             color: #1a1a1a !important;
+            border: none !important;
             padding: 8px 15px !important;
             border-radius: 4px !important;
-            text-decoration: none !important;
             font-weight: bold !important;
-            margin-left: 10px !important;
         }
         
-        .object-tools a:hover {
+        .button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover {
             background: #FFA500 !important;
+        }
+        
+        a:link, a:visited {
+            color: #FFB800 !important;
+        }
+        
+        .results th {
+            background: #1a1a1a !important;
+            color: white !important;
+        }
+        
+        .results tr:nth-child(even) {
+            background: #f8f9fa !important;
+        }
+        
+        .dashboard .module h2 {
+            background: #FFB800 !important;
+            color: #1a1a1a !important;
+            padding: 10px !important;
         }
     </style>
 {% endblock %}
