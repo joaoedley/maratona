@@ -12,6 +12,7 @@ import logging
 from .models import Inscricao
 from .serializers import InscricaoSerializer, PagamentoSerializer
 from .services import MercadoPagoService
+from .email_service import EmailService
 
 logger = logging.getLogger(__name__)
 
@@ -95,6 +96,10 @@ def verificar_pagamento(request, payment_id):
                 inscricao.status_pagamento = 'PAGO'
                 inscricao.data_pagamento = timezone.now()
                 inscricao.save()
+                
+                # Enviar email de confirmação
+                EmailService.enviar_confirmacao_inscricao(inscricao)
+                logger.info(f"Email de confirmação enviado para inscrição {inscricao.numero_inscricao}")
         except Inscricao.DoesNotExist:
             pass
         
@@ -164,7 +169,10 @@ def webhook_mercadopago(request):
                                 inscricao.status_pagamento = 'PAGO'
                                 inscricao.data_pagamento = timezone.now()
                                 inscricao.save()
-                                logger.info(f"Pagamento confirmado para inscrição {inscricao.numero_inscricao}")
+                                
+                                # Enviar email de confirmação
+                                EmailService.enviar_confirmacao_inscricao(inscricao)
+                                logger.info(f"Pagamento confirmado e email enviado para inscrição {inscricao.numero_inscricao}")
                         except Inscricao.DoesNotExist:
                             logger.error(f"Inscrição não encontrada para payment_id: {payment_id}")
             

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Inscrição - Maratona 2025</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #FFB800 0%, #FFA000 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px 20px;
+        }
+        .success-badge {
+            background: #d1edff;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid #bee5eb;
+        }
+        .success-badge i {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .inscricao-info {
+            background: #f8f9fa;
+            border-left: 4px solid #FFB800;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .inscricao-info h3 {
+            margin-top: 0;
+            color: #1a1a1a;
+            font-size: 18px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+        }
+        .info-value {
+            color: #1a1a1a;
+            font-weight: 500;
+        }
+        .event-details {
+            background: linear-gradient(135deg, #e7f3ff 0%, #f0f8ff 100%);
+            border: 2px solid #FFB800;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        .event-details h3 {
+            color: #1a1a1a;
+            margin-top: 0;
+            font-size: 20px;
+        }
+        .event-item {
+            display: inline-block;
+            margin: 10px 15px;
+            text-align: center;
+        }
+        .event-item i {
+            font-size: 20px;
+            color: #FFB800;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .event-item strong {
+            display: block;
+            color: #1a1a1a;
+            font-size: 14px;
+        }
+        .event-item span {
+            color: #495057;
+            font-size: 12px;
+        }
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .instructions h4 {
+            color: #856404;
+            margin-top: 0;
+            font-size: 16px;
+        }
+        .instructions ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 8px;
+            color: #856404;
+        }
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        .footer p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .footer .contact {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+        }
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                border-radius: 5px;
+            }
+            .header {
+                padding: 20px 15px;
+            }
+            .header h1 {
+                font-size: 24px;
+            }
+            .content {
+                padding: 20px 15px;
+            }
+            .event-item {
+                display: block;
+                margin: 15px 0;
+            }
+            .info-row {
+                flex-direction: column;
+            }
+            .info-label {
+                margin-bottom: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏃‍♂️ Inscrição Confirmada!</h1>
+            <p>1ª Primeira Corrida de Rua Amadora</p>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Success Message -->
+            <div class="success-badge">
+                <i>✅</i>
+                <strong>Parabéns! Sua inscrição foi confirmada com sucesso!</strong>
+                <p style="margin: 10px 0 0 0; font-size: 14px;">Seu pagamento foi processado e você está oficialmente inscrito na maratona.</p>
+            </div>
+
+            <!-- Registration Info -->
+            <div class="inscricao-info">
+                <h3>📋 Dados da sua Inscrição</h3>
+                <div class="info-row">
+                    <span class="info-label">Número da Inscrição:</span>
+                    <span class="info-value">{{ inscricao.numero_inscricao }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Nome:</span>
+                    <span class="info-value">{{ inscricao.nome }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Categoria:</span>
+                    <span class="info-value">{{ inscricao.get_categoria_display }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Valor Pago:</span>
+                    <span class="info-value">R$ {{ inscricao.valor_inscricao }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Data da Inscrição:</span>
+                    <span class="info-value">{{ inscricao.data_inscricao|date:"d/m/Y H:i" }}</span>
+                </div>
+            </div>
+
+            <!-- Event Details -->
+            <div class="event-details">
+                <h3>📅 Detalhes do Evento</h3>
+                <div class="event-item">
+                    <i>📅</i>
+                    <strong>19 de Outubro de 2025</strong>
+                    <span>Data do Evento</span>
+                </div>
+                <div class="event-item">
+                    <i>🕕</i>
+                    <strong>6h da manhã</strong>
+                    <span>Horário da Largada</span>
+                </div>
+                <div class="event-item">
+                    <i>🏃</i>
+                    <strong>5 KM</strong>
+                    <span>Distância</span>
+                </div>
+                <div class="event-item">
+                    <i>📍</i>
+                    <strong>Carnaíba-PE</strong>
+                    <span>Local</span>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <h4>📝 Instruções Importantes</h4>
+                <ul>
+                    <li><strong>Chegue com antecedência:</strong> Esteja no local 30 minutos antes da largada</li>
+                    <li><strong>Documento obrigatório:</strong> Traga um documento com foto no dia do evento</li>
+                    <li><strong>Kit do atleta:</strong> Será entregue no dia do evento mediante apresentação deste e-mail</li>
+                    <li><strong>Hidratação:</strong> Haverá pontos de hidratação ao longo do percurso</li>
+                    <li><strong>Premiação:</strong> Cerimônia de premiação após a chegada de todos os participantes</li>
+                </ul>
+            </div>
+
+            <p style="text-align: center; margin-top: 30px; color: #495057;">
+                <strong>Guarde este e-mail!</strong><br>
+                Você precisará apresentá-lo no dia do evento para retirar seu kit.
+            </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Academia Corpo & Saúde</strong></p>
+            <p>1ª Primeira Corrida de Rua Amadora</p>
+            
+            <div class="contact">
+                <p>📧 Dúvidas? Entre em contato conosco</p>
+                <p>🏃‍♂️ Nos vemos na largada!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

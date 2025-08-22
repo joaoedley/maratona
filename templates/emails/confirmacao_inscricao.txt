@@ -1,0 +1,33 @@
+🏃‍♂️ INSCRIÇÃO CONFIRMADA - MARATONA 2025 🏃‍♂️
+
+Parabéns, {{ inscricao.nome }}!
+
+Sua inscrição foi confirmada com sucesso para a 1ª Primeira Corrida de Rua Amadora!
+
+📋 DADOS DA SUA INSCRIÇÃO:
+- Número: {{ inscricao.numero_inscricao }}
+- Nome: {{ inscricao.nome }}
+- Categoria: {{ inscricao.get_categoria_display }}
+- Valor Pago: R$ {{ inscricao.valor_inscricao }}
+- Data da Inscrição: {{ inscricao.data_inscricao|date:"d/m/Y H:i" }}
+
+📅 DETALHES DO EVENTO:
+- Data: 19 de Outubro de 2025
+- Horário: 6h da manhã (largada)
+- Distância: 5 KM
+- Local: Carnaíba-PE
+
+📝 INSTRUÇÕES IMPORTANTES:
+✓ Chegue 30 minutos antes da largada
+✓ Traga documento com foto
+✓ Kit será entregue mediante apresentação deste e-mail
+✓ Pontos de hidratação disponíveis no percurso
+✓ Premiação após chegada de todos os participantes
+
+GUARDE ESTE E-MAIL! Você precisará apresentá-lo no dia do evento.
+
+Academia Corpo & Saúde
+1ª Primeira Corrida de Rua Amadora
+
+Dúvidas? Entre em contato conosco.
+Nos vemos na largada! 🏃‍♂️

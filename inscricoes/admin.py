@@ -1,8 +1,11 @@
 from django.contrib import admin
 from django.http import HttpResponse
 from django.utils.html import format_html
+from django.utils import timezone
 import csv
+
 from .models import Inscricao
+from .email_service import EmailService
 
 
 @admin.register(Inscricao)
@@ -29,7 +32,7 @@ class InscricaoAdmin(admin.ModelAdmin):
         }),
     )
     
-    actions = ['exportar_inscricoes', 'marcar_como_pago']
+    actions = ['exportar_inscricoes', 'marcar_como_pago', 'enviar_email_confirmacao']
     
     def status_pagamento_badge(self, obj):
         colors = {
@@ -75,6 +78,25 @@ class InscricaoAdmin(admin.ModelAdmin):
     
     def marcar_como_pago(self, request, queryset):
         from django.utils import timezone
-        updated = queryset.update(status_pagamento='PAGO', data_pagamento=timezone.now())
-        self.message_user(request, f'{updated} inscrições marcadas como pagas.')
-    marcar_como_pago.short_description = "Marcar como pago"
+        updated = 0
+        for inscricao in queryset:
+            if inscricao.status_pagamento != 'PAGO':
+                inscricao.status_pagamento = 'PAGO'
+                inscricao.data_pagamento = timezone.now()
+                inscricao.save()
+                
+                # Enviar email de confirmação
+                EmailService.enviar_confirmacao_inscricao(inscricao)
+                updated += 1
+        
+        self.message_user(request, f'{updated} inscrições marcadas como pagas e emails enviados.')
+    marcar_como_pago.short_description = "Marcar como pago e enviar email"
+    
+    def enviar_email_confirmacao(self, request, queryset):
+        enviados = 0
+        for inscricao in queryset:
+            if EmailService.enviar_confirmacao_inscricao(inscricao):
+                enviados += 1
+        
+        self.message_user(request, f'{enviados} emails de confirmação enviados.')
+    enviar_email_confirmacao.short_description = "Enviar email de confirmação"
