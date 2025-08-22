@@ -4,6 +4,7 @@ const API_BASE_URL = 'https://maratona-zghv.onrender.com/api/inscricoes';
 // Global variables
 let currentInscricao = null;
 let paymentCheckInterval = null;
+let currentPaymentData = null;
 
 // Simple scroll function for the main button
 function scrollToInscricao(event) {
@@ -58,6 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
     loadCategorias();
     setupFormValidation();
     setupEventListeners();
+    
+    // Verificar pagamentos pendentes
+    checkPendingPayments();
 });
 
 // Load categories from API
@@ -380,6 +384,15 @@ async function processarPagamento(inscricaoId) {
 
 // Show payment modal
 function showPaymentModal(paymentData) {
+    // Salvar dados do pagamento no localStorage para persistência
+    currentPaymentData = paymentData;
+    const paymentInfo = {
+        inscricao: currentInscricao,
+        payment: paymentData,
+        timestamp: Date.now()
+    };
+    localStorage.setItem('maratona_payment_pending', JSON.stringify(paymentInfo));
+    
     const content = `
         <div class="payment-info">
             <div class="text-center mb-4">
@@ -394,6 +407,17 @@ function showPaymentModal(paymentData) {
                 <h5 class="mb-3">Escaneie o QR Code para pagar</h5>
                 <img src="${paymentData.qr_code}" alt="QR Code PIX" class="img-fluid">
                 <div class="payment-amount">R$ ${paymentData.valor.toFixed(2)}</div>
+                
+                <!-- Chave PIX copiável -->
+                <div class="pix-key-container mt-3">
+                    <h6><i class="fas fa-key"></i> Ou copie a chave PIX:</h6>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="pixKey" value="${paymentData.pix_key || '9bc0e344-f2ea-4315-9012-682c949a8c21'}" readonly>
+                        <button class="btn btn-outline-primary" type="button" onclick="copyPixKey()">
+                            <i class="fas fa-copy"></i> Copiar
+                        </button>
+                    </div>
+                </div>
             </div>
             
             <div class="payment-instructions">
@@ -401,9 +425,9 @@ function showPaymentModal(paymentData) {
                 <ol>
                     <li>Abra o app do seu banco</li>
                     <li>Escolha a opção PIX</li>
-                    <li>Escaneie o QR Code acima</li>
+                    <li>Escaneie o QR Code OU copie a chave PIX</li>
                     <li>Confirme o pagamento de R$ ${paymentData.valor.toFixed(2)}</li>
-                    <li>Aguarde a confirmação automática</li>
+                    <li>Volte aqui e clique em "Verificar Pagamento"</li>
                 </ol>
             </div>
             
@@ -411,8 +435,18 @@ function showPaymentModal(paymentData) {
                 <div id="paymentStatus" class="status-badge status-pending">
                     <i class="fas fa-clock"></i> Aguardando Pagamento
                 </div>
+                
+                <div class="mt-3">
+                    <button type="button" class="btn btn-primary" onclick="manualPaymentCheck()">
+                        <i class="fas fa-sync"></i> Verificar Pagamento
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary ms-2" onclick="closePaymentModal()">
+                        <i class="fas fa-times"></i> Fechar
+                    </button>
+                </div>
+                
                 <p class="mt-3 text-muted small">
-                    O status será atualizado automaticamente após a confirmação do pagamento
+                    <i class="fas fa-info-circle"></i> Você pode fechar esta janela e voltar depois para verificar o pagamento
                 </p>
             </div>
         </div>
@@ -516,6 +550,133 @@ function getCategoriaLabel(categoria) {
         'VISITANTES': 'Categoria Geral Visitantes'
     };
     return categorias[categoria] || categoria;
+}
+
+// Copy PIX key to clipboard
+function copyPixKey() {
+    const pixKeyInput = document.getElementById('pixKey');
+    pixKeyInput.select();
+    pixKeyInput.setSelectionRange(0, 99999);
+    
+    try {
+        document.execCommand('copy');
+        showAlert('success', 'Chave PIX copiada! Cole no seu app do banco.');
+    } catch (err) {
+        showAlert('warning', 'Não foi possível copiar automaticamente. Copie manualmente: ' + pixKeyInput.value);
+    }
+}
+
+// Manual payment check
+async function manualPaymentCheck() {
+    if (!currentPaymentData) {
+        // Tentar recuperar do localStorage
+        const savedPayment = localStorage.getItem('maratona_payment_pending');
+        if (savedPayment) {
+            const paymentInfo = JSON.parse(savedPayment);
+            currentInscricao = paymentInfo.inscricao;
+            currentPaymentData = paymentInfo.payment;
+        } else {
+            showAlert('warning', 'Dados do pagamento não encontrados.');
+            return;
+        }
+    }
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/pagamento/${currentPaymentData.payment_id}/verificar/`);
+        const data = await response.json();
+        
+        if (data.success) {
+            updatePaymentStatus(data.status);
+            
+            if (data.status === 'approved') {
+                // Limpar dados salvos
+                localStorage.removeItem('maratona_payment_pending');
+                showPaymentSuccess();
+            } else {
+                showAlert('info', 'Pagamento ainda não confirmado. Tente novamente em alguns minutos.');
+            }
+        } else {
+            showAlert('warning', 'Erro ao verificar pagamento: ' + data.error);
+        }
+    } catch (error) {
+        console.error('Erro ao verificar pagamento:', error);
+        showAlert('danger', 'Erro ao verificar pagamento. Tente novamente.');
+    }
+}
+
+// Close payment modal
+function closePaymentModal() {
+    if (paymentCheckInterval) {
+        clearInterval(paymentCheckInterval);
+    }
+    pagamentoModal.hide();
+}
+
+// Check for pending payments on page load
+function checkPendingPayments() {
+    const savedPayment = localStorage.getItem('maratona_payment_pending');
+    if (savedPayment) {
+        const paymentInfo = JSON.parse(savedPayment);
+        const timeDiff = Date.now() - paymentInfo.timestamp;
+        
+        // Se passou menos de 24 horas, mostrar opção de verificar
+        if (timeDiff < 24 * 60 * 60 * 1000) {
+            showPendingPaymentAlert(paymentInfo);
+        } else {
+            // Limpar dados antigos
+            localStorage.removeItem('maratona_payment_pending');
+        }
+    }
+}
+
+// Show pending payment alert
+function showPendingPaymentAlert(paymentInfo) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-warning alert-dismissible fade show position-fixed';
+    alertDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; max-width: 400px;';
+    alertDiv.innerHTML = `
+        <h6><i class="fas fa-exclamation-triangle"></i> Pagamento Pendente</h6>
+        <p class="mb-2">Você tem um pagamento pendente para a inscrição <strong>${paymentInfo.inscricao.numero_inscricao}</strong></p>
+        <div class="d-flex gap-2">
+            <button type="button" class="btn btn-sm btn-warning" onclick="resumePendingPayment()">
+                <i class="fas fa-credit-card"></i> Verificar Pagamento
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="dismissPendingPayment()">
+                <i class="fas fa-times"></i> Dispensar
+            </button>
+        </div>
+    `;
+    
+    document.body.appendChild(alertDiv);
+    
+    // Auto remove after 10 seconds
+    setTimeout(() => {
+        if (alertDiv.parentNode) {
+            alertDiv.remove();
+        }
+    }, 10000);
+}
+
+// Resume pending payment
+function resumePendingPayment() {
+    const savedPayment = localStorage.getItem('maratona_payment_pending');
+    if (savedPayment) {
+        const paymentInfo = JSON.parse(savedPayment);
+        currentInscricao = paymentInfo.inscricao;
+        currentPaymentData = paymentInfo.payment;
+        showPaymentModal(paymentInfo.payment);
+    }
+    
+    // Remove alert
+    const alert = document.querySelector('.alert-warning');
+    if (alert) alert.remove();
+}
+
+// Dismiss pending payment
+function dismissPendingPayment() {
+    localStorage.removeItem('maratona_payment_pending');
+    const alert = document.querySelector('.alert-warning');
+    if (alert) alert.remove();
 }
 
 // Show loading modal
