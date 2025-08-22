@@ -183,5 +183,5 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'noreply@maratona2025.com')
 
 # Email settings for development (console backend)
-if DEBUG:
+if DEBUG and os.getenv('EMAIL_HOST_USER') == '':
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
