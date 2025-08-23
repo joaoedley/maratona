@@ -412,7 +412,7 @@ function showPaymentModal(paymentData) {
                 <div class="pix-key-container mt-3">
                     <h6><i class="fas fa-key"></i> Ou copie a chave PIX:</h6>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="pixKey" value="${paymentData.pix_key || '9bc0e344-f2ea-4315-9012-682c949a8c21'}" readonly>
+                        <input type="text" class="form-control" id="pixKey" value="${paymentData.qr_code_data || ''}" readonly>
                         <button class="btn btn-outline-primary" type="button" onclick="copyPixKey()">
                             <i class="fas fa-copy"></i> Copiar
                         </button>
