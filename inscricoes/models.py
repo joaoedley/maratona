@@ -47,7 +47,7 @@ class Inscricao(models.Model):
     # campos para controle de pagamento
     mercado_pago_payment_id = models.CharField(max_length=100, blank=True, null=True)
     qr_code_data = models.TextField(blank=True, null=True)
-    valor_inscricao = models.DecimalField(max_digits=10, decimal_places=2, default=60.00)
+    valor_inscricao = models.DecimalField(max_digits=10, decimal_places=2, default=0.10)
     
     # Campos de controle
     data_inscricao = models.DateTimeField(auto_now_add=True, verbose_name='Data da Inscrição')
